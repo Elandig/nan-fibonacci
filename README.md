@@ -50,4 +50,4 @@ console.log(instance.get()) // 0
 ```
 
 # License
-[MIT](https://github.com/Elandig/electron-react-spa/blob/main/LICENSE) Copyright (C) 2021 [Elandig](https://github.com/Elandig)
+[MIT](https://github.com/Elandig/nan-fibonacci/blob/main/LICENSE) Copyright (C) 2021 [Elandig](https://github.com/Elandig)
