@@ -16,7 +16,7 @@ private:
   static void GetValue(const Nan::FunctionCallbackInfo<v8::Value> &info);
   static void ResetValue(const Nan::FunctionCallbackInfo<v8::Value> &info);
   static Nan::Persistent<v8::Function> constructor;
-  unsigned int value_[3];
+  unsigned long long value_[3];
 };
 
 #endif

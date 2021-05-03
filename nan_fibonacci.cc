@@ -5,7 +5,7 @@
 Nan::Persistent<v8::Function> NanFibonacci::constructor;
 
 // Variable for initialization & reset
-const unsigned int initialValues[] = {0, 1, 0};
+const unsigned long long initialValues[] = {0, 1, 0};
 
 NanFibonacci::NanFibonacci()
 {
@@ -52,7 +52,7 @@ void NanFibonacci::New(const Nan::FunctionCallbackInfo<v8::Value> &info)
 void NanFibonacci::GetValue(const Nan::FunctionCallbackInfo<v8::Value> &info)
 {
   NanFibonacci *obj = ObjectWrap::Unwrap<NanFibonacci>(info.Holder());
-  info.GetReturnValue().Set(Nan::To<v8::String>(Nan::New(obj->value_[2])).ToLocalChecked());
+  info.GetReturnValue().Set(Nan::New(std::to_string(obj->value_[2])).ToLocalChecked());
 
   // Not the ideal solution but it's good enough for the task I'm given
   obj->value_[0] = obj->value_[1];
@@ -64,5 +64,5 @@ void NanFibonacci::ResetValue(const Nan::FunctionCallbackInfo<v8::Value> &info)
 {
   NanFibonacci *obj = ObjectWrap::Unwrap<NanFibonacci>(info.Holder());
   memcpy(obj->value_, initialValues, sizeof(initialValues));
-  info.GetReturnValue().Set(Nan::To<v8::String>(Nan::New(obj->value_[2])).ToLocalChecked());
+  info.GetReturnValue().Set(Nan::New(std::to_string(obj->value_[2])).ToLocalChecked());
 }
