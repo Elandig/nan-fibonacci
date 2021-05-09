@@ -7,8 +7,9 @@
 /*
  * Purpose: Creates, initializes and returns a new InfInt* array
  */
-InfInt *NanFibonacciBase::NewArray(size_t size = 3)
+InfInt *NanFibonacciBase::NewArray(size_t size = INITIAL_SIZE)
 {
+  // I surely could've used STL containers but I'm specifically asked to do it this way
   InfInt *obj = new InfInt[size];
   for (size_t i = 0; i < size; i++)
     obj[i] = 0;

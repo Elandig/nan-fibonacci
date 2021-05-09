@@ -25,7 +25,7 @@ private:
   static void GetValue(const Nan::FunctionCallbackInfo<v8::Value> &info);
   static void NextValue(const Nan::FunctionCallbackInfo<v8::Value> &info);
   static void ResetValue(const Nan::FunctionCallbackInfo<v8::Value> &info);
-  static void NanFibonacci::IsFibo(const Nan::FunctionCallbackInfo<v8::Value> &info);
+  static void IsFibo(const Nan::FunctionCallbackInfo<v8::Value> &info);
 };
 
 #endif
