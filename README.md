@@ -2,6 +2,8 @@
 Node.js Addon that returns the next number of the fibonacci sequence
 * [Usage example in a web application](https://github.com/Elandig/nan-fibonacci-wapp)
 
+# (INSTRUCTIONS ARE CURRENTLY OUTDATED)
+
 # Install
 
 ## Clone the repository
