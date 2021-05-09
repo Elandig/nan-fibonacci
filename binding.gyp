@@ -2,7 +2,11 @@
   "targets": [
     {
       "target_name": "nan_fibonacci",
-      "sources": [ "addon.cc", "nan_fibonacci.cc" ],
+      "sources": [
+        "src/addon.cc",
+        "src/nan_fibonacci.cc",
+        "src/nan_fibonacci_base.cc"
+        ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")"
       ]
