@@ -1,0 +1,3 @@
+[submodule "lib/infint"]
+	path = lib/infint
+	url = https://github.com/Elandig/infint.git
