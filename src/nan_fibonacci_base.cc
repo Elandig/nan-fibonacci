@@ -77,7 +77,7 @@ std::string NanFibonacciBase::GenFibonacci(size_t n)
   InfInt *arr = NewArray(n);
   for (size_t i = 0; i < n; i++)
     Fibo(arr, i);
-  std::string str = FormatArray(arr, n);
+  std::string str = arr[n-1].toString();
   delete[] arr;
   return str;
 }

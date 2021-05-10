@@ -17,7 +17,7 @@ const init = () => {
   printSequence(instance)
 
   console.log(`\n* Check method .genFibo(number)`)
-  console.log(`Should output the first 20 numbers of the fibonacci sequence: ${instance.genFibo(20)}`)
+  console.log(`Should output the 20th number of the fibonacci sequence: ${instance.genFibo(20)}`)
 
   console.log(`\n* Check method .isFibo(string | number)`)
   checkIsFibonacci();
