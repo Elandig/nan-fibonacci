@@ -34,6 +34,7 @@ void NanFibonacci::Init(v8::Local<v8::Object> exports)
   Nan::SetPrototypeMethod(tpl, "next", NextValue);
   Nan::SetPrototypeMethod(tpl, "reset", ResetValue);
   Nan::SetPrototypeMethod(tpl, "isFibo", IsFibo);
+  Nan::SetPrototypeMethod(tpl, "genFibo", GenFibo);
 
   constructor.Reset(tpl->GetFunction(context).ToLocalChecked());
   exports->Set(context, Nan::New("NanFibonacci").ToLocalChecked(), tpl->GetFunction(context).ToLocalChecked());
@@ -107,4 +108,30 @@ void NanFibonacci::IsFibo(const Nan::FunctionCallbackInfo<v8::Value> &info)
     return;
   }
   info.GetReturnValue().Set(Nan::New(NanFibonacciBase::isFibonacci(InfInt(*Nan::Utf8String(info[0])))));
+}
+
+/*
+ * Purpose: Generates specified amount of numbers of the fibonacci sequence 
+ */
+void NanFibonacci::GenFibo(const Nan::FunctionCallbackInfo<v8::Value> &info)
+{
+  v8::Local<v8::Context> context = info.GetIsolate()->GetCurrentContext();
+  NanFibonacci *obj = ObjectWrap::Unwrap<NanFibonacci>(info.Holder());
+  if (info.Length() < 1)
+  {
+    Nan::ThrowTypeError("Wrong amount of arguments");
+    return;
+  }
+  if (info[0]->IsUndefined() || !info[0]->IsNumber())
+  {
+    Nan::ThrowTypeError("Wrong argument");
+    return;
+  }
+  int64_t length = info[0]->NumberValue(context).FromJust();
+  if (length <= 0)
+  {
+    Nan::ThrowTypeError("Value must be greater than zero");
+    return;
+  }
+  info.GetReturnValue().Set(Nan::New(NanFibonacciBase::GenFibonacci(length)).ToLocalChecked());
 }

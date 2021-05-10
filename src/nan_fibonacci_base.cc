@@ -49,20 +49,11 @@ void NanFibonacciBase::ResizeArray(size_t new_value)
 }
 
 /*
- * Purpose: Formats the "value_" InfInt* array to a string
+ * Purpose: Formats the "value_" InfInt* array to string
  */
-std::string NanFibonacciBase::GetFormattedArray() const
+std::string NanFibonacciBase::GetFormattedArray()
 {
-  std::string result;
-  for (size_t i = 0; i < last_index; i++)
-  {
-    result.append(value_[i].toString());
-    if (i != last_index - 1)
-      result.append(",");
-    else if (i == last_index)
-      result.append(".");
-  }
-  return result;
+  return FormatArray(value_, last_index);
 }
 
 /*
@@ -73,11 +64,33 @@ void NanFibonacciBase::GenNextValue()
 {
   if (last_index + 1 >= arr_size)
     ResizeArray(last_index + POOL_BEFORE_RESIZE);
-  if (last_index < 2)
-    value_[last_index] = last_index;
-  else
-    value_[last_index] = value_[last_index - 1] + value_[last_index - 2];
+  Fibo(value_, last_index);
   last_index++;
+}
+
+/*
+ * Purpose: Generates specified amount of numbers of the fibonacci sequence
+ * And formats them to string
+ */
+std::string NanFibonacciBase::GenFibonacci(size_t n)
+{
+  InfInt *arr = NewArray(n);
+  for (size_t i = 0; i < n; i++)
+    Fibo(arr, i);
+  std::string str = FormatArray(arr, n);
+  delete[] arr;
+  return str;
+}
+
+/*
+ * Purpose: Calculates the fibonacci sequence for the given array
+ */
+void NanFibonacciBase::Fibo(InfInt *&arr, size_t i)
+{
+  if (i < 2)
+    arr[i] = i;
+  else
+    arr[i] = arr[i - 1] + arr[i - 2];
 }
 
 /*
@@ -94,16 +107,29 @@ void NanFibonacciBase::Reset()
 }
 
 /*
- * Utils:
- */
-
-/*
  * Purpose: Checks if the given number is perfect square
  */
 bool NanFibonacciBase::isPerfectSquare(InfInt &val)
 {
   InfInt sqrt_v = val.intSqrt();
   return (sqrt_v * sqrt_v == val);
+}
+
+/*
+ * Purpose: Formats the given InfInt* array to string
+ */
+std::string NanFibonacciBase::FormatArray(InfInt *&arr, size_t size)
+{
+  std::string result;
+  for (size_t i = 0; i < size; i++)
+  {
+    result.append(arr[i].toString());
+    if (i + 1 == size)
+      result.append(".");
+    else
+      result.append(",");
+  }
+  return result;
 }
 
 /*
