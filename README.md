@@ -2,13 +2,17 @@
 Node.js Addon that returns the next number of the fibonacci sequence
 * [Usage example in a web application](https://github.com/Elandig/nan-fibonacci-wapp)
 
-# (INSTRUCTIONS ARE CURRENTLY OUTDATED)
 
 # Install
 
 ## Clone the repository
 ```
 git clone https://github.com/Elandig/nan-fibonacci.git
+```
+
+## Initialize & update submodules
+```
+git submodule update --init
 ```
 
 ## Install dependencies
@@ -41,14 +45,22 @@ var instance = new NanFibonacci()
 
 console.log(instance.get()) // 0
 console.log(instance.get()) // 1
-console.log(instance.get()) // 1
-console.log(instance.get()) // 2
+console.log(instance.next()) // true
+console.log(instance.next()) // true
 console.log(instance.get()) // 3
 console.log(instance.get()) // 5
 ...
 // Reset the accumulator
 instance.reset()
 console.log(instance.get()) // 0
+...
+// Check if the given number is the part of the fibonacci sequence
+instance.isFibo("280571172992510140037611932413038677189525") // true
+instance.isFibo(8944394323791464) // true (Integer values have limitations)
+...
+// Generate the N-th number of the fibonacci sequence
+instance.genFibo(4) // 2
+instance.genFibo(16) // 610
 ...
 ```
 
