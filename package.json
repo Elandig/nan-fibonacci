@@ -1,7 +1,7 @@
 {
   "name": "nan-fibonacci",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Node.js Addon that returns the next number of the fibonacci sequence",
   "main": "index.js",
   "scripts": {
