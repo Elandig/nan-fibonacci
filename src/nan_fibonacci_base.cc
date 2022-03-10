@@ -13,6 +13,9 @@ InfInt *NanFibonacciBase::NewArray(size_t size = INITIAL_SIZE)
   InfInt *obj = new InfInt[size];
   for (size_t i = 0; i < size; i++)
     obj[i] = 0;
+  // 2022 Older-Wiser edit
+  // I could've used C++'s Type[]() syntax, i.e:
+  // IntInt *obj = new InfInt[size]();
   return obj;
 }
 
@@ -25,7 +28,7 @@ void NanFibonacciBase::CreateArray()
   {
     value_ = NewArray(INITIAL_SIZE);
     arr_size = INITIAL_SIZE;
-    last_index = 0;
+    last_index = 0; // Might've wanted to defaulted that in the declaration
   }
 }
 
@@ -34,12 +37,15 @@ void NanFibonacciBase::CreateArray()
  */
 void NanFibonacciBase::ResizeArray(size_t new_value)
 {
+  // This is just ugly.
+  // I was quite dumb and certainly didn't know about realloc & memset.
+  // But that works, I guess.
   if (new_value > last_index)
   {
     InfInt *new_array = new InfInt[new_value];
     if (new_array)
     {
-      std::copy(value_, value_ + std::min(last_index, new_value), new_array);
+      std::copy(value_, value_ + std::min(last_index, new_value), new_array); // I've already compared new_value > last_index, yet I still use ::std::min. Genius.
       delete[] value_;
       value_ = new_array;
       arr_size = new_value;
@@ -76,7 +82,7 @@ std::string NanFibonacciBase::GenFibonacci(size_t n)
 {
   InfInt *arr = NewArray(n);
   for (size_t i = 0; i < n; i++)
-    Fibo(arr, i);
+    Fibo(arr, i); // Pointer arithmetics would look a bit better here.
   std::string str = arr[n-1].toString();
   delete[] arr;
   return str;
@@ -85,7 +91,7 @@ std::string NanFibonacciBase::GenFibonacci(size_t n)
 /*
  * Purpose: Calculates the fibonacci sequence for the given array
  */
-void NanFibonacciBase::Fibo(InfInt *&arr, size_t i)
+void NanFibonacciBase::Fibo(InfInt *&arr, size_t i) // LMAO WHAT. I don't even change the pointer to take it by the reference, only the value it points to.
 {
   if (i < 2)
     arr[i] = i;
@@ -96,7 +102,7 @@ void NanFibonacciBase::Fibo(InfInt *&arr, size_t i)
 /*
  * Purpose: Resets the state
  */
-void NanFibonacciBase::Reset()
+void NanFibonacciBase::Reset() // Woulda better resized & reset this array.
 {
   if (value_)
   {
@@ -124,7 +130,7 @@ std::string NanFibonacciBase::FormatArray(InfInt *&arr, size_t size)
   for (size_t i = 0; i < size; i++)
   {
     result.append(arr[i].toString());
-    if (i + 1 == size)
+    if (i + 1 == size) // Yeah.. result.append(int + 1 == size ? "." : ",");
       result.append(".");
     else
       result.append(",");
